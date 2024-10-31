@@ -19,3 +19,22 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.sideBar_width{
+  width: 23%;
+}
+
+.detail_width{
+  width: 77%;
+}
+
+.sidebarItem{
+  border-radius: 8px;
+  color: #777575;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebarItem:hover{
+  background: #05f58d;
+  color: white;
+}
