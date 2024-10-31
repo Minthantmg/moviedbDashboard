@@ -11,8 +11,10 @@ export default function DashboardLayout({
 
     return (
         <div className="flex">
-            {showSidebar && <Sidebar />}
-            <main className="flex-1 p-4">{children}</main>
+            <div className="sideBar_width">
+                {showSidebar && <Sidebar />}
+            </div>
+            <main className="detail_width flex-1 p-4">{children}</main>
         </div>
     );
 }
