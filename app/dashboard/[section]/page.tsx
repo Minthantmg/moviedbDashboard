@@ -3,13 +3,15 @@ import { useSidebar } from "@/app/components/contexts/SidebarContext";
 import { useEffect, useState } from "react";
 import Settings from '../../components/sections/Settings';
 import Users from '@/app/components/sections/Users';
-import Dashboard from '@/app/components/sections/Dashboard';
+import Home from '@/app/components/sections/home';
 import { usePathname } from "next/navigation";
+import Movies from "@/app/components/sections/movies/movies";
 
 const sectionComponents: { [key: string]: React.ComponentType } = {
     settings: Settings,
     users: Users,
-    dashboard: Dashboard
+    home: Home,
+    movies: Movies
 };
 
 export default function SectionPage({ params }: { params: { section: string } | Promise<{ section: string }> }) {
