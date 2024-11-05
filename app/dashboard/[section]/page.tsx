@@ -6,7 +6,6 @@ import Page from '@/app/components/sections/users/page';
 import Home from '@/app/components/sections/home';
 import { usePathname } from "next/navigation";
 import Movies from "@/app/components/sections/movies/page";
-import { Skeleton } from "@/components/ui/skeleton"
 import Loading from "@/app/components/sections/loading";
 
 const sectionComponents: { [key: string]: React.ComponentType } = {
