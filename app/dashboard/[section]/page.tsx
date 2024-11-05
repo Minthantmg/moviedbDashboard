@@ -2,14 +2,14 @@
 import { useSidebar } from "@/app/components/contexts/SidebarContext";
 import { useEffect, useState } from "react";
 import Settings from '../../components/sections/Settings';
-import Users from '@/app/components/sections/users/Users';
+import Page from '@/app/components/sections/users/page';
 import Home from '@/app/components/sections/home';
 import { usePathname } from "next/navigation";
-import Movies from "@/app/components/sections/movies/movies";
+import Movies from "@/app/components/sections/movies/page";
 
 const sectionComponents: { [key: string]: React.ComponentType } = {
     settings: Settings,
-    users: Users,
+    users: Page,
     home: Home,
     movies: Movies
 };
