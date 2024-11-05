@@ -2,7 +2,7 @@
 import { useSidebar } from "@/app/components/contexts/SidebarContext";
 import { useEffect, useState } from "react";
 import Settings from '../../components/sections/Settings';
-import Users from '@/app/components/sections/Users';
+import Users from '@/app/components/sections/users/Users';
 import Home from '@/app/components/sections/home';
 import { usePathname } from "next/navigation";
 import Movies from "@/app/components/sections/movies/movies";
