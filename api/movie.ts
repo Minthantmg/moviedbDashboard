@@ -8,3 +8,4 @@ export const getMovieList = async () => {
         throw e;
     }
 };
+
