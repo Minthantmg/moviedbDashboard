@@ -3,7 +3,7 @@ import {useUser} from "@/hooks/useUser";
 import {DataTable} from "@/app/components/sections/users/data-table";
 import {columns} from "@/app/components/sections/users/columns";
 
-const Users = () => {
+const Page = () => {
     const {getUserListHook} = useUser()
     const {data: user,isLoading,isSuccess} = getUserListHook()
     return (
@@ -20,4 +20,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default Page;
