@@ -11,7 +11,7 @@ const sectionComponents: { [key: string]: React.ComponentType } = {
     settings: Settings,
     users: Page,
     home: Home,
-    movies: Movies
+    movies: Movies,
 };
 
 export default function SectionPage({ params }: { params: { section: string } | Promise<{ section: string }> }) {
