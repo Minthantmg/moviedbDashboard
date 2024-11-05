@@ -2,7 +2,7 @@
 
 import {ColumnDef} from "@tanstack/react-table"
 import {User} from "@/type";
-import { ArrowDownAZ,ArrowDown01 } from "lucide-react"
+import { ArrowDownAZ } from "lucide-react"
 import {Button} from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react"
 import {
@@ -11,6 +11,22 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
 
 
 export const columns: ColumnDef<User>[] = [
@@ -48,8 +64,8 @@ export const columns: ColumnDef<User>[] = [
     {
         id: "actions",
         cell: ({ row }) => {
-            const movie = row.original
-            console.log(movie)
+            const user = row.original
+            console.log(user)
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -59,8 +75,40 @@ export const columns: ColumnDef<User>[] = [
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem>View Detail</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Sheet>
+                                <SheetTrigger asChild>
+                                    <div className="text-sm cursor-pointer py-2
+                                    hover:bg-gray-100 px-2">View Detail</div>
+                                </SheetTrigger>
+                                <SheetContent>
+                                    <SheetHeader>
+                                        <SheetTitle>{user.name}</SheetTitle>
+                                        <SheetDescription>
+                                            {user.email}
+                                        </SheetDescription>
+                                    </SheetHeader>
+                                </SheetContent>
+                            </Sheet>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <div className="text-sm cursor-pointer py-2
+                                    hover:bg-gray-100 px-2">Delete
+                                    </div>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                        <DialogDescription>
+                                            This action cannot be undone. This will permanently delete your account
+                                            and remove your data from our servers.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                </DialogContent>
+                            </Dialog>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
