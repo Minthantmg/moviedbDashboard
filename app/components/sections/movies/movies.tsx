@@ -7,7 +7,6 @@ import {columns} from "@/app/components/sections/movies/columns";
 const AddUser = () => {
     const {getMovieListHook} = useMovies()
     const {data: movie, isSuccess,isLoading ,isError} = getMovieListHook()
-
     return (
         <div>
             {isError && <>Error...</>}
