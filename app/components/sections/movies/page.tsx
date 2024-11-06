@@ -9,6 +9,7 @@ const page = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {getMovieListHook} = useMovies()
     const {data: movie, isSuccess,isLoading ,isError} = getMovieListHook()
+    console.log(movie?.[0].cast)
     return (
         <div>
             {isError && <>Error...</>}
