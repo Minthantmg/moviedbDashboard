@@ -2,13 +2,14 @@ import React from 'react';
 import {useUser} from "@/hooks/useUser";
 import {DataTable} from "@/app/components/sections/users/data-table";
 import {columns} from "@/app/components/sections/users/columns";
+import Loading from "@/app/components/sections/loading";
 
 const Page = () => {
     const {getUserListHook} = useUser()
     const {data: user,isLoading,isSuccess} = getUserListHook()
     return (
         <div>
-            {isLoading && <>Loading...</>}
+            {isLoading && <><Loading /></>}
             {isSuccess && (
                 <div>
                     <div className='text-3xl mt-4'>User and Admin List</div>
