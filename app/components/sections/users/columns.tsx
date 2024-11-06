@@ -95,6 +95,24 @@ export const columns: ColumnDef<User>[] = [
                             <Dialog>
                                 <DialogTrigger asChild>
                                     <div className="text-sm cursor-pointer py-2
+                                    hover:bg-gray-100 px-2">Edit
+                                    </div>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                        <DialogDescription>
+                                            This action cannot be undone. This will permanently delete your account
+                                            and remove your data from our servers.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                </DialogContent>
+                            </Dialog>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <div className="text-sm cursor-pointer py-2
                                     hover:bg-gray-100 px-2">Delete
                                     </div>
                                 </DialogTrigger>
