@@ -10,11 +10,17 @@ export default function DashboardLayout({
     const { showSidebar } = useSidebar();
 
     return (
-        <div className="flex">
-            <div className="sideBar_width">
-                {showSidebar && <Sidebar />}
+        <>
+            <div className="lg:flex hidden">
+                <div className="sideBar_width">
+                    {showSidebar && <Sidebar/>}
+                </div>
+                <main className="detail_width flex-1 p-4">{children}</main>
             </div>
-            <main className="detail_width flex-1 p-4">{children}</main>
-        </div>
+            <div className="lg:hidden block">
+                This is error page
+            </div>
+        </>
+
     );
 }
