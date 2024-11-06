@@ -10,7 +10,7 @@ interface DeleteUserDialogProps {
     user: User;
 }
 
-const DeleteUserDialog: React.FC<DeleteUserDialogProps> = ({ isOpen, setIsOpen, user }) => {
+const DeleteUserDialog: React.FC<DeleteUserDialogProps> = ({ isOpen, setIsOpen }) => {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
