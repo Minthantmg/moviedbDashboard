@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import {getUserList} from "@/api/user";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {createUser, getUserList} from "@/api/user";
 
 const getUserListHook = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -9,8 +9,18 @@ const getUserListHook = () => {
     });
 };
 
+const createUserHook = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useMutation({
+        mutationKey: ["post","user"],
+        mutationFn: createUser,
+    })
+}
+
+
 export const useUser = () => {
     return {
-        getUserListHook
+        getUserListHook,
+        createUserHook,
     };
 };
