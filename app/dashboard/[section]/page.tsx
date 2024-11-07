@@ -15,7 +15,13 @@ const sectionComponents: { [key: string]: React.ComponentType } = {
     movies: Movies,
 };
 
-export default function SectionPage({ params }: { params: { section: string } | Promise<{ section: string }> }) {
+interface SectionPageProps {
+    params: {
+        section: string;
+    };
+}
+
+export default function SectionPage({ params }: SectionPageProps) {
     const [section, setSection] = useState<string | null>(null);
     const { setShowSidebar } = useSidebar();
     const pathname = usePathname();
