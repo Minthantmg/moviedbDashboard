@@ -1,4 +1,4 @@
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
+import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import {User} from "@/type";
 
 interface UserDetailSheetProps {
@@ -14,8 +14,7 @@ const UserDetailSheet: React.FC<UserDetailSheetProps> = ({user}) => {
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>{user.name}</SheetTitle>
-                    <SheetDescription>
-                        <div className="text-black">
+                        <div className="text-black text-sm">
                             <div className="flex mt-4">
                                 <div className="w-1/3">
                                     Name
@@ -41,7 +40,6 @@ const UserDetailSheet: React.FC<UserDetailSheetProps> = ({user}) => {
                                 </div>
                             </div>
                         </div>
-                    </SheetDescription>
                 </SheetHeader>
             </SheetContent>
         </Sheet>
