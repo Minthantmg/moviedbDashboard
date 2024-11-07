@@ -8,8 +8,12 @@ import AddUserSheet from "@/app/components/sections/users/components/AddUserShee
 
 const Page = () => {
     const {getUserListHook} = useUser()
-    const {data: user,isLoading,isSuccess} = getUserListHook()
+    const {data: user,isLoading,isSuccess,refetch} = getUserListHook()
     const [isAddDialogOpen, setAddDialogOpen] = useState(false);
+
+    const handleUserAdded = () => {
+        refetch();
+    };
 
     return (
         <div>
@@ -18,7 +22,7 @@ const Page = () => {
                 <div>
                     <div className='text-3xl mt-4'>User and Admin List</div>
                     <div className='mt-4'>Total: {user.length} person</div>
-                    <AddUserSheet isOpen={isAddDialogOpen} setIsOpen={setAddDialogOpen} />
+                    <AddUserSheet isOpen={isAddDialogOpen} setIsOpen={setAddDialogOpen} onUserAdded={handleUserAdded}/>
                     <DataTable columns={columns} data={user}/>
                 </div>
             )}
