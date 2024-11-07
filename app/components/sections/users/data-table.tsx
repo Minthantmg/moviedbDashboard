@@ -49,6 +49,11 @@ export function DataTable<TData, TValue>({
             sorting,
             columnFilters,
         },
+        initialState: {
+            pagination: {
+                pageSize: 7,
+            },
+        },
     })
 
     return (
@@ -85,7 +90,7 @@ export function DataTable<TData, TValue>({
                     </TableHeader>
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.slice(0, 8).map((row) => (
+                            table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
