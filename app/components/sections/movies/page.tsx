@@ -21,7 +21,7 @@ const page = () => {
                 <>
                     <div className='text-3xl mt-4'>Movie List</div>
                     <div className='mt-4'>Total: {movie.length} movies</div>
-                    <AddMovieSheet isOpen={isAddMovieDialogOpen} setIsOpen={setAddMovieDialogOpen} />
+                    <AddMovieSheet isOpen={isAddMovieDialogOpen} setIsOpen={setAddMovieDialogOpen}/>
                     <div>
                         <DataTable columns={columns} data={movie}/>
                     </div>
