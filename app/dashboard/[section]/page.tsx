@@ -16,9 +16,9 @@ const sectionComponents: { [key: string]: React.ComponentType } = {
 };
 
 interface SectionPageProps {
-    params: {
+    params: Promise<{
         section: string;
-    };
+    }>;
 }
 
 export default function SectionPage({ params }: SectionPageProps) {
@@ -28,14 +28,15 @@ export default function SectionPage({ params }: SectionPageProps) {
 
     useEffect(() => {
         const loadSection = async () => {
-            const resolvedParams = await (params instanceof Promise ? params : Promise.resolve(params));
+            // Unwrap the params promise
+            const resolvedParams = await params;
             setSection(resolvedParams.section);
         };
         loadSection();
     }, [params]);
 
     useEffect(() => {
-        // Show the sidebar for all /dashboard/* route
+        // Show the sidebar for all /dashboard/* routes
         const isDashboardRoute = pathname.startsWith('/');
         setShowSidebar(isDashboardRoute);
 
@@ -43,7 +44,7 @@ export default function SectionPage({ params }: SectionPageProps) {
     }, [pathname, setShowSidebar]);
 
     if (section === null) {
-        return <div><Loading/></div>;
+        return <div><Loading /></div>;
     }
 
     // Get the component for the section if it exists
