@@ -25,6 +25,15 @@ body {
   color: white;
 }
 
+.scrollable-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
