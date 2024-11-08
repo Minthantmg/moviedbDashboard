@@ -24,7 +24,17 @@ export const columns: ColumnDef<User>[] = [
     },
     {
         accessorKey: "email",
-        header: "Email",
+        header: ({column}) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Username
+                    <ArrowDownAZ className="ml-2 h-4 w-4"/>
+                </Button>
+            )
+        }
     },
     {
         accessorKey: "password",
