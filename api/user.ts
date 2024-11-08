@@ -24,3 +24,11 @@ export const createUser = async ({name, email, password,role}:CreateUserParams) 
         throw e;
     }
 }
+export const deleteUser = async (userId: string) => {
+    try {
+        const res = await axiosInstance.delete(`/user/${userId}`); // Add userId to the URL path
+        return res.data;
+    } catch (e) {
+        throw e;
+    }
+};
