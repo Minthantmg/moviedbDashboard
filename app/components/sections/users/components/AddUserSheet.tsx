@@ -31,8 +31,13 @@ const AddUserSheet: React.FC<AddUserDialogProps> = ({isOpen, setIsOpen, onUserAd
     },[isSuccess,setIsOpen,onUserAdded])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        await createUser({name: name, email, password,role})
+        try{
+            e.preventDefault()
+            await createUser({name: name, email, password,role})
+            setIsOpen(false);
+        }catch (error){
+            throw error;
+        }
     }
 
     return (
@@ -121,9 +126,8 @@ const AddUserSheet: React.FC<AddUserDialogProps> = ({isOpen, setIsOpen, onUserAd
                             <button
                                 type="submit"
                                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
-                                onClick={() => setIsOpen(false)}
                             >
-                                {isPending ? "Loading..." : "Save"}
+                                {isPending ? <span className="loading loading-spinner loading-sm"></span> : "Save"}
                             </button>
                         </div>
                     </form>
