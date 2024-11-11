@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import {Dispatch, SetStateAction, useState} from "react";
 import {User} from "@/type";
+import {useUser} from "@/hooks/useUser";
 
 interface EditUserDialogProps {
     isOpen: boolean;
@@ -18,6 +19,8 @@ interface EditUserDialogProps {
 
 const EditUserDialog: React.FC<EditUserDialogProps> = ({isOpen, setIsOpen,user}) => {
     const [formData, setFormData] = useState<User>(user);
+    const {updateUserHook} = useUser()
+    const { mutateAsync: updateData, isPending} = updateUserHook()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -27,12 +30,12 @@ const EditUserDialog: React.FC<EditUserDialogProps> = ({isOpen, setIsOpen,user})
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
+        console.log(user._id)
         e.preventDefault();
-        console.log("Updated user data:", formData);
+        await updateData({ userId: user._id, updatedData: formData });
         setIsOpen(false);
     };
-    console.log(formData.name)
 
 
     return (
@@ -126,7 +129,7 @@ const EditUserDialog: React.FC<EditUserDialogProps> = ({isOpen, setIsOpen,user})
                             type="submit"
                             className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                         >
-                            Save
+                            {isPending ? <span className="loading loading-spinner loading-sm"></span> : "Save"}
                         </button>
                     </div>
                 </form>
