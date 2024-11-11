@@ -1,6 +1,5 @@
 import {sidebarItems} from "@/constants/sideBarItems";
 import Link from "next/link";
-import {Menu} from 'lucide-react'
 import movie from '../public/movie.png'
 import Image from "next/image";
 
@@ -8,12 +7,11 @@ const Sidebar = () => {
     return (
         <div className="min-h-screen flex flex-col justify-between border-r-2">
             <div>
-                <div className='flex justify-between items-center px-2 pt-4 pb-16'>
+                <div className='flex justify-center items-center px-2 pt-4 pb-16'>
                     <div className="flex justify-center items-center gap-2">
                         <Image src={movie} alt="title_img" width={32} height={32}/>
                         MovieDb
                     </div>
-                    <Menu/>
                 </div>
                 {sidebarItems.map((item) => (
                     <Link
