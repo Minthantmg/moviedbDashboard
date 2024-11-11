@@ -7,7 +7,7 @@ const Page = () => {
             <div className="text-center">
                 <h1>Welcome to MovieDB Dashboard</h1>
                 <p>
-                    Go to your <Link href="/dashboard">Dashboard</Link>
+                    Go to your <Link href="/dashboard/users">Dashboard</Link>
                 </p>
             </div>
         </main>
