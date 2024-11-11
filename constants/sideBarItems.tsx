@@ -1,12 +1,12 @@
-import { TvMinimal,Users,Settings,Clapperboard } from 'lucide-react'
+import { Users,Clapperboard } from 'lucide-react'
 
 export const sidebarItems = [
-    {
-        title: "Home",
-        url: "../dashboard/home",
-        icon: <TvMinimal />,
-        tabValue: 1,
-    },
+    // {
+    //     title: "Home",
+    //     url: "../dashboard/home",
+    //     icon: <TvMinimal />,
+    //     tabValue: 1,
+    // },
     {
         title: "Users",
         url: "../dashboard/users",
@@ -19,10 +19,10 @@ export const sidebarItems = [
         icon: <Clapperboard />,
         tabValue: 3,
     },
-    {
-        title: "Setting",
-        url: "../dashboard/settings",
-        icon: <Settings />,
-        tabValue: 4,
-    },
+    // {
+    //     title: "Setting",
+    //     url: "../dashboard/settings",
+    //     icon: <Settings />,
+    //     tabValue: 4,
+    // },
 ];
