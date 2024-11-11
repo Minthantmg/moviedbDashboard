@@ -4,8 +4,8 @@ import { useUser } from '@/hooks/useUser';
 import { useMovies } from '@/hooks/useMovies';
 import Loading from '@/app/components/sections/loading';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart, Tooltip, Legend, ArcElement } from 'chart.js';
-import {Movie} from "@/type";
+import { Chart, Tooltip, Legend, ArcElement, ChartData, ChartOptions } from 'chart.js';
+import { Movie } from '@/type';
 
 Chart.register(Tooltip, Legend, ArcElement);
 
@@ -16,7 +16,7 @@ const Home = () => {
     const { getMovieListHook } = useMovies();
     const { data: movies, isSuccess, isLoading } = getMovieListHook();
 
-    const [movieChartData, setMovieChartData] = useState({
+    const [movieChartData, setMovieChartData] = useState<ChartData<'doughnut'>>({
         labels: [],
         datasets: [
             {
@@ -26,7 +26,7 @@ const Home = () => {
         ],
     });
 
-    const options = {
+    const options: ChartOptions<'doughnut'> = {
         plugins: {
             legend: {
                 display: true,
@@ -34,7 +34,6 @@ const Home = () => {
             },
         },
     };
-
 
     useEffect(() => {
         if (movies && movies.length > 0) {
@@ -81,7 +80,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-center items-center mt-16">
                         <div className="w-full h-96 mr-10">
-                            <Doughnut options={options} data={movieChartData}/>
+                            <Doughnut options={options} data={movieChartData} />
                         </div>
                     </div>
                 </>
