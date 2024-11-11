@@ -1,4 +1,5 @@
 import {axiosInstance} from "@/utills/axiosInstance";
+import {User} from "@/type";
 
 interface CreateUserParams {
     name: string;
@@ -32,3 +33,12 @@ export const deleteUser = async (userId: string) => {
         throw e;
     }
 };
+
+export const updateUser = async (userId: string, updatedData: Partial<User>) => {
+    try {
+        const res = await axiosInstance.put(`/user/${userId}`,updatedData)
+        return res.data;
+    }catch (e){
+        throw e;
+    }
+}
