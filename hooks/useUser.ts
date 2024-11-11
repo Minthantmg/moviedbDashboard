@@ -1,5 +1,6 @@
 import {useMutation, useQuery,useQueryClient} from "@tanstack/react-query";
-import {createUser, deleteUser, getUserList} from "@/api/user";
+import {createUser, deleteUser, getUserList, updateUser} from "@/api/user";
+import {User} from "@/type";
 
 const getUserListHook = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -21,6 +22,7 @@ const deleteUserHook = () =>{
     const queryClient = useQueryClient();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     return useMutation({
+        mutationKey: ["delete", "user"],
         mutationFn: deleteUser,
         onSuccess: () => {
             try {
@@ -33,11 +35,31 @@ const deleteUserHook = () =>{
     });
 }
 
+const updateUserHook = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const queryClient = useQueryClient();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useMutation({
+        mutationKey: ["update", "user"],
+        mutationFn: ({ userId, updatedData }: { userId: string; updatedData: Partial<User> }) =>
+            updateUser(userId, updatedData),
+        onSuccess: () => {
+            try {
+                // @ts-ignore
+                queryClient.invalidateQueries(["get", "user"]);
+            } catch (error) {
+                console.error('Error while invalidating query:', error);
+            }
+        },
+    })
+}
+
 
 export const useUser = () => {
     return {
         getUserListHook,
         createUserHook,
-        deleteUserHook
+        deleteUserHook,
+        updateUserHook
     };
 };
