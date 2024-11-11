@@ -24,7 +24,7 @@ const UserActionsDropdown = ({ user }: { user: User }) => {
                     <UserDetailSheet user={user} />
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    <EditUserDialog isOpen={isEditDialogOpen} setIsOpen={setEditDialogOpen} />
+                    <EditUserDialog isOpen={isEditDialogOpen} setIsOpen={setEditDialogOpen} user={user}/>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                     <DeleteUserDialog isOpen={isDeleteDialogOpen} setIsOpen={setDeleteDialogOpen} user={user} />
