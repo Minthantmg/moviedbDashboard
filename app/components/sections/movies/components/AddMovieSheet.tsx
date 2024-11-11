@@ -1,3 +1,4 @@
+"use client"
 import React, {Dispatch, SetStateAction} from 'react';
 import {
     Dialog,
@@ -15,6 +16,15 @@ interface AddMovieDialogProps {
 }
 
 const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
+    // const [title, setTitle] = useState("");
+    // const [description,setDescription] = useState("")
+    // const [releaseDate, setReleaseDate] = useState("");
+    // const [genre, setGenre] = useState("");
+    // const [rating, setRating] = useState("");
+    // const [director, setDirector] = useState("");
+    // const [cast, setCast] = useState("");
+    // const [duration,setDuration] = useState("");
+
     return (
         <div>
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
