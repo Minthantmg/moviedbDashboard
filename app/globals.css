@@ -28,6 +28,7 @@ body {
 .scrollable-container {
   max-height: 300px;
   overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .scrollable-container::-webkit-scrollbar {
