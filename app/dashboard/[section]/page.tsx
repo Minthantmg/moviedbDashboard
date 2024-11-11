@@ -9,9 +9,9 @@ import Movies from "@/app/components/sections/movies/page";
 import Loading from "@/app/components/sections/loading";
 
 const sectionComponents: { [key: string]: React.ComponentType } = {
-    settings: Settings,
+    //settings: Settings,
     users: Page,
-    home: Home,
+    // home: Home,
     movies: Movies,
 };
 
