@@ -13,17 +13,13 @@ interface DeleteUserDialogProps {
 
 const DeleteUserDialog: React.FC<DeleteUserDialogProps> = ({ isOpen, setIsOpen ,user}) => {
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const {deleteUserHook} = useUser()
     const { mutateAsync: deleteData, isPending } = deleteUserHook();
 
-    console.log(user);
     const handleDelete = async () => {
         try {
-            console.log('Deleting user with ID:', user._id);
             await deleteData(user._id);
             setIsOpen(false);
-            console.log('User deleted successfully');
         } catch (error) {
             console.error('Error deleting user:', error);
         }
@@ -44,7 +40,7 @@ const DeleteUserDialog: React.FC<DeleteUserDialogProps> = ({ isOpen, setIsOpen ,
                 <DialogFooter>
                     <Button variant="outline" onClick={() => setIsOpen(false)}>Cancel</Button>
                     <Button variant="destructive" onClick={handleDelete}>
-                        {isPending ? 'Deleting...' : 'Delete'}
+                        {isPending ? <span className="loading loading-spinner loading-sm"></span> : 'Delete'}
                     </Button>
                 </DialogFooter>
             </DialogContent>
