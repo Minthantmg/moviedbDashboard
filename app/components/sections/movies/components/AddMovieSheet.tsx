@@ -23,7 +23,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
     const [genre, setGenre] = useState<string[]>([]);
     const [rating, setRating] = useState<number>(0);
     const [director, setDirector] = useState("");
-    const [cast, setCast] = useState<string[]>(["Actor A"]);
+    const [cast] = useState<string[]>(["Actor A"]);
     const [duration, setDuration] = useState<number>(0);
     const {createMovieHook} = useMovies()
     const {mutateAsync:createMovie,isPending} = createMovieHook()
