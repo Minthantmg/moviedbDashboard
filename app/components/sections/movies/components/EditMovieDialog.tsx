@@ -46,7 +46,7 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
                         You can edit the movie details here.
                     </DialogDescription>
                 </DialogHeader>
-                <form className="space-y-4" onSubmit={handleSubmit}>
+                <form className="scrollable-container space-y-4" onSubmit={handleSubmit}>
                     <div className="flex flex-col">
                         <label htmlFor="title" className="text-sm font-medium text-gray-700">
                             Title
@@ -95,22 +95,14 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
                         />
                     </div>
 
-                    {/*<div className="flex flex-col">*/}
-                    {/*    <label htmlFor="role" className="text-sm font-medium text-gray-700">*/}
-                    {/*        Genre*/}
-                    {/*    </label>*/}
-                    {/*    <select*/}
-                    {/*        id="genre"*/}
-                    {/*        name="genre"*/}
-                    {/*        value={formData.genre}*/}
-                    {/*        onChange={handleChange}*/}
-                    {/*        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"*/}
-                    {/*        required*/}
-                    {/*    >*/}
-                    {/*        <option value="admin">Admin</option>*/}
-                    {/*        <option value="user">User</option>*/}
-                    {/*    </select>*/}
-                    {/*</div>*/}
+                    <div className="flex flex-col">
+                        <label htmlFor="role" className="text-sm font-medium text-gray-700">
+                            Genre
+                        </label>
+                        <div className="mt-2">
+                            {Array.isArray(formData.genre) ? formData.genre.join(', ') : formData.genre}
+                        </div>
+                    </div>
 
                     <div className="flex flex-col">
                         <label htmlFor="rating" className="text-sm font-medium text-gray-700">
@@ -144,26 +136,18 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
                         />
                     </div>
 
-                    {/*<div className="flex flex-col">*/}
-                    {/*    <label htmlFor="cast" className="text-sm font-medium text-gray-700">*/}
-                    {/*        Cast*/}
-                    {/*    </label>*/}
-                    {/*    <select*/}
-                    {/*        id="cast"*/}
-                    {/*        name="cast"*/}
-                    {/*        value={formData.cast}*/}
-                    {/*        onChange={handleChange}*/}
-                    {/*        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"*/}
-                    {/*        required*/}
-                    {/*    >*/}
-                    {/*        <option value="admin">Admin</option>*/}
-                    {/*        <option value="user">User</option>*/}
-                    {/*    </select>*/}
-                    {/*</div>*/}
+                    <div className="flex flex-col">
+                        <label htmlFor="cast" className="text-sm font-medium text-gray-700">
+                            Cast
+                        </label>
+                        <div className="mt-2">
+                            {Array.isArray(formData.cast) ? formData.cast.join(', ') : formData.cast}
+                        </div>
+                    </div>
 
                     <div className="flex flex-col">
                         <label htmlFor="duration" className="text-sm font-medium text-gray-700">
-                            Duration
+                        Duration
                         </label>
                         <input
                             type="text"
