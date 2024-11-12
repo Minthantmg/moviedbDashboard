@@ -1,6 +1,6 @@
 import React from 'react';
 import {Movie} from "@/type";
-import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
+import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 
 interface MovieDetailSheetProps {
     movie: Movie;
