@@ -20,6 +20,7 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
     const {updateMovieHook} = useMovies()
     const { mutateAsync: updateData, isPending} = updateMovieHook()
 
+    console.log("hello")
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData((prevData:Movie) => ({
