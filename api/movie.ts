@@ -41,7 +41,7 @@ export const deleteMovie = async (movieId: string) => {
 
 export const updateMovie = async (movieID: string, updatedData: Partial<Movie>) => {
     try {
-        const res = await axiosInstance.put(`/user/${movieID}`,updatedData)
+        const res = await axiosInstance.put(`/movie/${movieID}`,updatedData)
         return res.data;
     }catch (e){
         throw e;
