@@ -4,10 +4,12 @@ import { MoreHorizontal } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import DeleteMovieDialog from "@/app/components/sections/movies/components/DeleteMovieDialog";
 import {Movie} from "@/type";
+import EditMovieDialog from "@/app/components/sections/movies/components/EditMovieDialog";
+import MovieDetailSheet from "@/app/components/sections/movies/components/MovieDetailSheet";
 
 
 const MovieActionsDropdown = ({ movie }: { movie: Movie }) => {
-    //const [isEditDialogOpen, setEditDialogOpen] = useState(false);
+    const [isEditDialogOpen, setEditDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     return (
@@ -20,13 +22,12 @@ const MovieActionsDropdown = ({ movie }: { movie: Movie }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                    {/*<UserDetailSheet user={user} />*/}
+                    <MovieDetailSheet movie={movie} />
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    {/*<EditUserDialog isOpen={isEditDialogOpen} setIsOpen={setEditDialogOpen} user={user}/>*/}
+                    <EditMovieDialog isOpen={isEditDialogOpen} setIsOpen={setEditDialogOpen} movie={movie} />
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    {/*<DeleteUserDialog isOpen={isDeleteDialogOpen} setIsOpen={setDeleteDialogOpen} user={user} />*/}
                     <DeleteMovieDialog isOpen={isDeleteDialogOpen} setIsOpen={setDeleteDialogOpen} movie={movie} />
                 </DropdownMenuItem>
             </DropdownMenuContent>
