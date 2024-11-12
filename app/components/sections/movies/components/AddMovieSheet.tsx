@@ -1,5 +1,5 @@
 "use client"
-import React, {Dispatch, SetStateAction} from 'react';
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import {
     Dialog,
     DialogContent,
@@ -9,6 +9,7 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
+import {useMovies} from "@/hooks/useMovies";
 
 interface AddMovieDialogProps {
     isOpen: boolean;
@@ -16,14 +17,35 @@ interface AddMovieDialogProps {
 }
 
 const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
-    // const [title, setTitle] = useState("");
-    // const [description,setDescription] = useState("")
-    // const [releaseDate, setReleaseDate] = useState("");
-    // const [genre, setGenre] = useState("");
-    // const [rating, setRating] = useState("");
-    // const [director, setDirector] = useState("");
-    // const [cast, setCast] = useState("");
-    // const [duration,setDuration] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [releaseDate, setReleaseDate] = useState("");
+    const [genre, setGenre] = useState<string[]>([]);
+    const [rating, setRating] = useState<number>(0);
+    const [director, setDirector] = useState("");
+    const [cast, setCast] = useState<string[]>(["Actor A"]);
+    const [duration, setDuration] = useState<number>(0);
+    const {createMovieHook} = useMovies()
+    const {mutateAsync:createMovie,isPending} = createMovieHook()
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            await createMovie({
+                title,
+                description,
+                releaseDate,
+                genre,
+                rating,
+                director,
+                cast,
+                duration,
+            });
+            setIsOpen(false);
+        } catch (error) {
+            console.error("Error creating movie:", error);
+        }
+    };
 
     return (
         <div>
@@ -38,7 +60,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                             You can add movie details here.
                         </DialogDescription>
                     </DialogHeader>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="scrollable-container space-y-4">
                             <div className="flex flex-col">
                                 <label htmlFor="title" className="text-sm font-medium text-gray-700">
@@ -51,6 +73,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     placeholder="Enter movie title"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={e => setTitle(e.target.value)}
                                 />
                             </div>
 
@@ -65,6 +88,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     placeholder="Enter movie description"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={e => setDescription(e.target.value)}
                                 />
                             </div>
 
@@ -79,6 +103,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     placeholder="Enter movie releaseDate"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={e => setReleaseDate(e.target.value)}
                                 />
                             </div>
 
@@ -91,6 +116,10 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     name="genre"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={(e) => {
+                                        const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
+                                        setGenre(selectedOptions);
+                                    }}
                                 >
                                     <option value="sci-Fi">Sci-Fi</option>
                                     <option value="action">Action</option>
@@ -117,6 +146,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     placeholder="Enter movie rating"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={e => setRating(Number(e.target.value))}
                                 />
                             </div>
 
@@ -131,22 +161,37 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     placeholder="Enter movie director"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={e => setDirector(e.target.value)}
                                 />
                             </div>
 
-                            <div className="flex flex-col">
-                                <label htmlFor="cast" className="text-sm font-medium text-gray-700">
-                                    Cast
-                                </label>
-                                <input
-                                    type="text"
-                                    id="cast"
-                                    name="cast"
-                                    placeholder="Enter movie cast"
-                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                    required
-                                />
-                            </div>
+                            {/*<div className="flex flex-col">*/}
+                            {/*    <label htmlFor="cast" className="text-sm font-medium text-gray-700">*/}
+                            {/*        Cast*/}
+                            {/*    </label>*/}
+                            {/*    <select*/}
+                            {/*        id="cast"*/}
+                            {/*        name="cast"*/}
+                            {/*        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"*/}
+                            {/*        required*/}
+                            {/*        onChange={(e) => {*/}
+                            {/*            const selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);*/}
+                            {/*            setGenre(selectedOptions);*/}
+                            {/*        }}*/}
+                            {/*    >*/}
+                            {/*        <option value="sci-Fi">Sci-Fi</option>*/}
+                            {/*        <option value="action">Action</option>*/}
+                            {/*        <option value="crime">Crime</option>*/}
+                            {/*        <option value="drama">Drama</option>*/}
+                            {/*        <option value="biography">Biography</option>*/}
+                            {/*        <option value="history">History</option>*/}
+                            {/*        <option value="romance">Romance</option>*/}
+                            {/*        <option value="history">History</option>*/}
+                            {/*        <option value="animation">Animation</option>*/}
+                            {/*        <option value="adventure">Adventure</option>*/}
+                            {/*        <option value="war">War</option>*/}
+                            {/*    </select>*/}
+                            {/*</div>*/}
 
                             <div className="flex flex-col">
                                 <label htmlFor="duration" className="text-sm font-medium text-gray-700">
@@ -159,6 +204,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     placeholder="Enter movie duration"
                                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     required
+                                    onChange={e => setDuration(Number(e.target.value))}
                                 />
                             </div>
 
@@ -175,7 +221,7 @@ const AddMovieSheet: React.FC<AddMovieDialogProps> = ({isOpen,setIsOpen}) => {
                                     type="submit"
                                     className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                                 >
-                                    Save
+                                    {isPending ? <span className="loading loading-spinner loading-sm"></span> : "Save"}
                                 </button>
                             </div>
                         </div>
