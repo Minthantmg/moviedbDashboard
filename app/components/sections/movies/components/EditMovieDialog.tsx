@@ -4,7 +4,7 @@ import {
     DialogContent,
     DialogDescription,
     DialogHeader,
-    DialogTitle,
+    DialogTitle, DialogTrigger,
 } from "@/components/ui/dialog";
 import {Movie} from "@/type";
 import {useMovies} from "@/hooks/useMovies";
@@ -17,8 +17,8 @@ interface EditMovieDialogProps {
 
 const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}) => {
     const [formData, setFormData] = useState<Movie>(movie);
-    const {} = useMovies()
-    //const { mutateAsync: updateData, isPending} = updateUserHook()
+    const {updateMovieHook} = useMovies()
+    const { mutateAsync: updateData, isPending} = updateMovieHook()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -31,14 +31,17 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
     const handleSubmit = async (e: React.FormEvent) => {
         console.log(movie._id)
         e.preventDefault();
-       // await updateData({ userId: movie._id, updatedData: formData });
+       await updateData({ movieId: movie._id, updatedData: formData });
         setIsOpen(false);
     };
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogTrigger asChild>
+                <div className="text-sm cursor-pointer py-2 hover:bg-gray-100 px-2">Edit</div>
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Edit User</DialogTitle>
+                    <DialogTitle>Edit Movie</DialogTitle>
                     <DialogDescription>
                         You can edit the movie details here.
                     </DialogDescription>
@@ -92,22 +95,22 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
                         />
                     </div>
 
-                    <div className="flex flex-col">
-                        <label htmlFor="role" className="text-sm font-medium text-gray-700">
-                            Genre
-                        </label>
-                        <select
-                            id="role"
-                            name="role"
-                            value={formData.genre}
-                            onChange={handleChange}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            required
-                        >
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                    </div>
+                    {/*<div className="flex flex-col">*/}
+                    {/*    <label htmlFor="role" className="text-sm font-medium text-gray-700">*/}
+                    {/*        Genre*/}
+                    {/*    </label>*/}
+                    {/*    <select*/}
+                    {/*        id="genre"*/}
+                    {/*        name="genre"*/}
+                    {/*        value={formData.genre}*/}
+                    {/*        onChange={handleChange}*/}
+                    {/*        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"*/}
+                    {/*        required*/}
+                    {/*    >*/}
+                    {/*        <option value="admin">Admin</option>*/}
+                    {/*        <option value="user">User</option>*/}
+                    {/*    </select>*/}
+                    {/*</div>*/}
 
                     <div className="flex flex-col">
                         <label htmlFor="rating" className="text-sm font-medium text-gray-700">
@@ -141,22 +144,22 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
                         />
                     </div>
 
-                    <div className="flex flex-col">
-                        <label htmlFor="cast" className="text-sm font-medium text-gray-700">
-                            Cast
-                        </label>
-                        <select
-                            id="cast"
-                            name="cast"
-                            value={formData.cast}
-                            onChange={handleChange}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            required
-                        >
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                    </div>
+                    {/*<div className="flex flex-col">*/}
+                    {/*    <label htmlFor="cast" className="text-sm font-medium text-gray-700">*/}
+                    {/*        Cast*/}
+                    {/*    </label>*/}
+                    {/*    <select*/}
+                    {/*        id="cast"*/}
+                    {/*        name="cast"*/}
+                    {/*        value={formData.cast}*/}
+                    {/*        onChange={handleChange}*/}
+                    {/*        className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"*/}
+                    {/*        required*/}
+                    {/*    >*/}
+                    {/*        <option value="admin">Admin</option>*/}
+                    {/*        <option value="user">User</option>*/}
+                    {/*    </select>*/}
+                    {/*</div>*/}
 
                     <div className="flex flex-col">
                         <label htmlFor="duration" className="text-sm font-medium text-gray-700">
@@ -187,7 +190,7 @@ const EditMovieDialog:React.FC<EditMovieDialogProps> = ({isOpen,setIsOpen,movie}
                             type="submit"
                             className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                         >
-                            {/*{isPending ? <span className="loading loading-spinner loading-sm"></span> : "Save"}*/}
+                            {isPending ? <span className="loading loading-spinner loading-sm"></span> : "Save"}
                         </button>
                     </div>
                 </form>
