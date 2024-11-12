@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/utills/axiosInstance";
+import {Movie} from "@/type";
 
 export interface CreateMovieParams {
     title: string;
@@ -25,6 +26,24 @@ export const createMovie = async (movieData: CreateMovieParams) => {
         const res = await axiosInstance.post("/movie", movieData);
         return res.data;
     } catch (e) {
+        throw e;
+    }
+}
+
+export const deleteMovie = async (movieId: string) => {
+    try{
+        const res = await axiosInstance.delete(`/movie/${movieId}`);
+        return res.data;
+    }catch (e){
+        throw e;
+    }
+}
+
+export const updateMovie = async (movieID: string, updatedData: Partial<Movie>) => {
+    try {
+        const res = await axiosInstance.put(`/user/${movieID}`,updatedData)
+        return res.data;
+    }catch (e){
         throw e;
     }
 }
