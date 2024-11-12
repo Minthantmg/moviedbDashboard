@@ -1,9 +1,9 @@
 'use client'
 import { useSidebar } from "@/app/components/contexts/SidebarContext";
 import { useEffect, useState } from "react";
-import Settings from '../../components/sections/Settings';
+// import Settings from '../../components/sections/Settings';
 import Page from '@/app/components/sections/users/page';
-import Home from '@/app/components/sections/home';
+// import Home from '@/app/components/sections/home';
 import { usePathname } from "next/navigation";
 import Movies from "@/app/components/sections/movies/page";
 import Loading from "@/app/components/sections/loading";
