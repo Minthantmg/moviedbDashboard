@@ -79,7 +79,7 @@ export const columns: ColumnDef<Movie>[] = [
         },
         cell: ({row}) => {
             const rating = row.original.rating;
-            return <div className="text-center font-medium">${rating.toFixed(1)}/10</div>;
+            return <div className="text-center font-medium">${rating}/10</div>;
         },
     },
     {
