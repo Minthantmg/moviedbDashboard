@@ -52,7 +52,7 @@ const MovieDetailSheet: React.FC<MovieDetailSheetProps> = ({movie}) => {
                                     Genre
                                 </div>
                                 <div className="w-2/3 text-gray-500 break-all">
-                                    {movie.genre.join(", ")}
+                                    {movie.genre}
                                 </div>
                             </div>
                             <div className="flex mt-4">
